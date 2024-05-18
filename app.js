@@ -16,9 +16,9 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'My API',
+      title: 'Social Media REST API',
       version: '1.0.0',
-      description: 'API documentation for my project'
+      description: 'REST API documentation for a basic social media application'
     },
     servers: [
       {
