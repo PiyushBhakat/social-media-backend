@@ -232,7 +232,7 @@ app.post('/posts', postController.createPost);
  *       204:
  *         description: Post deleted successfully
  *       403:
- *         description: Unauthorized: You are not the author of this post
+ *         description: Unauthorized as you're not the user
  *       404:
  *         description: Post not found
  *       500:
