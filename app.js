@@ -167,7 +167,7 @@ app.post('/users/follow', userController.followUser);
  * @swagger
  * /posts/feed:
  *   get:
- *     summary: Get posts from followed users
+ *     summary: Get posts from followed users or from current user
  *     tags: [Posts]
  *     security:
  *       - bearerAuth: []

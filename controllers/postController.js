@@ -8,13 +8,15 @@ const getFeedPosts = async (req, res) => {
     const [followerRows] = await pool.query('SELECT following_id FROM followers WHERE follower_id = ?', [userId]);
     const followingIds = followerRows.map(row => row.following_id);
 
+    let postRows;
     if (followingIds.length === 0) {
-      // If the user follows no one, return an empty array
-      return res.json([]);
+      // If the user follows no one, return posts by the user themselves
+      [postRows] = await pool.query('SELECT * FROM posts WHERE user_id = ?', [userId]);
+    } else {
+      // Include the user's own posts in the result
+      followingIds.push(userId);
+      [postRows] = await pool.query('SELECT * FROM posts WHERE user_id IN (?)', [followingIds]);
     }
-
-    // Get posts from users that the current user follows
-    const [postRows] = await pool.query('SELECT * FROM posts WHERE user_id IN (?)', [followingIds]);
 
     res.json(postRows);
   } catch (error) {
