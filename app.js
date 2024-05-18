@@ -215,7 +215,7 @@ app.post('/posts', postController.createPost);
 
 /**
  * @swagger
- * /posts/:postId:
+ * /posts/{postId}:
  *   delete:
  *     summary: Delete a post
  *     tags: [Posts]
