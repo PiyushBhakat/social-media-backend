@@ -183,6 +183,65 @@ app.get('/posts/feed', postController.getFeedPosts);
 
 /**
  * @swagger
+ * /posts:
+ *   post:
+ *     summary: Create a new post
+ *     tags: [Posts]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - content
+ *             properties:
+ *               content:
+ *                 type: string
+ *                 description: The content of the post
+ *     responses:
+ *       201:
+ *         description: Post created successfully
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ */
+app.post('/posts', postController.createPost);
+
+/**
+ * @swagger
+ * /posts/{postId}:
+ *   delete:
+ *     summary: Delete a post
+ *     tags: [Posts]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: postId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the post to delete
+ *     responses:
+ *       204:
+ *         description: Post deleted successfully
+ *       403:
+ *         description: Unauthorized: You are not the author of this post
+ *       404:
+ *         description: Post not found
+ *       500:
+ *         description: Internal server error
+ */
+app.delete('/posts/:postId', postController.removePost);
+
+/**
+ * @swagger
  * /posts/{postId}/comments:
  *   get:
  *     summary: Get comments for a specific post
